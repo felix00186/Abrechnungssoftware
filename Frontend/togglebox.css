@@ -1,0 +1,43 @@
+.box {
+    width: 70%;
+    border: 2px solid black;
+    padding: 2px;
+    background-color: white;
+    cursor: pointer;
+    justify-content: space-between;
+    align-items: center;
+    justify-self: right;
+}
+
+.container {
+    display: flex;
+}
+
+.arrow {
+    transition: transform 0.3s ease;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.content {
+    padding-top: 2px;
+    border-top: 0px;
+}
+
+.content button {
+    display: block;
+    width: 100%;
+    padding: 5px;
+}
+
+.closed {
+    display: none;
+}
+
+.expanded {
+    display: block;
+}
+
+.expanded_arrow {
+    transform: rotate(90deg);
+}

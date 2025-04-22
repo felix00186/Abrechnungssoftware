@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Kalkulationen</title>
+        <link rel="stylesheet" href="/main.css">
+        <link rel="stylesheet" href="/ausdruck.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+        <script src="/requests.js"></script>
+        <script src="/kalkulationsgrafik.js"></script>
+    </head>
+    <body>
+        <div class="desktop">
+            <div style="display:grid;grid-template-columns: 2fr 5fr;">
+                <a href="/"><img src="/logo.png" style="height:55px;padding:5px;"></a>
+                <a class="pagetitle">Kalkulationen</a>
+            </div>
+            <div class="columnbox" style="grid-template-columns:9fr 1fr;">
+                <div class="desktop column" id="content">
+                    <table class="content_to_print" id="feld" style="width:90%;"></table>
+                    <button onclick="savePrices();">&#x2714;&#xFE0F;&#x1F4BE; Neue Preise speichern</button>
+                </div>
+                <div class="desktop column" style="display: block; padding: 3px;">
+                    <button style="width:80%;height:30px;" onclick="window.location.href='/kalkulationen.html';">&#x2B05;&#xFE0F; zurück</button>
+                    <button style="width:80%;height:30px;" onclick="window.print();">&#x1F5A8;&#xFE0F; drucken</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

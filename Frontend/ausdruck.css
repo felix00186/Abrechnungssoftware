@@ -1,0 +1,29 @@
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    .content_to_print, .content_to_print * {
+        visibility: visible;
+    }
+
+    .content_to_print {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .content_to_print h1 {
+        text-align: center;
+    }
+}
+
+.text_to_print {
+    font-family: "Cascadia Mono Light" !important;
+}
+
+div.edit_field table {
+    page-break-inside: avoid;
+}

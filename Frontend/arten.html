@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Öffnungsarten</title>
+        <link rel="stylesheet" href="/main.css">
+        <script src="/requests.js"></script>
+        <script src="/arten.js"></script>
+    </head>
+    <body>
+        <div class="desktop">
+            <div style="display:grid;grid-template-columns: 2fr 5fr;">
+                <a href="/"><img src="/logo.png" style="height:55px;padding:5px;"></a>
+                <a class="pagetitle">Bereiche für Einnahmen und Ausgaben</a>
+            </div>
+            <div class="columnbox" style="grid-template-columns: 1fr 1fr;">
+                <div class="desktop column">
+                    <table class="standard" id="artentable"></table>
+                </div>
+                <div class="desktop column" id="edit_field">
+                    <button class="neu_button" id="neu_button" onclick="openEditField(null, '', '', true);">&#x2795; Neu</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

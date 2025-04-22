@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Einkäufe</title>
+        <link rel="stylesheet" href="/main.css">
+        <script src="/requests.js"></script>
+        <script src="/oeffnungen.js"></script>
+    </head>
+    <body>
+        <div class="desktop">
+            <div style="display:grid;grid-template-columns: 2fr 5fr;">
+                <a href="/"><img src="/logo.png" style="height:55px;padding:5px;"></a>
+                <a class="pagetitle">Öffnungen/Einnahmen</a>
+            </div>
+            <div class="columnbox" style="grid-template-columns:3fr 4fr;">
+                <div class="desktop column">
+                    <div class="jahresanzeige">
+                        <button onclick="setJahr(-1);"><</button>
+                        <div id="jahreszahl"></div>
+                        <button onclick="setJahr(1);">></button>
+                    </div>
+                    <table class="standard" id="oeffnungtable"></table>
+                </div>
+                <div class="desktop column" id="edit_field">
+                    <button class="neu_button" id="neu_button" onclick="openEditField(null, '', '', null, null, null, true);">&#x2795; Neu</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

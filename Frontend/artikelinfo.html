@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Artikelinfos</title>
+        <link rel="stylesheet" href="/main.css">
+        <script src="/requests.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+        <script src="/artikelinfo.js"></script>
+    </head>
+    <body>
+        <div class="desktop">
+            <div style="display:grid;grid-template-columns: 2fr 5fr;">
+                <a href="/"><img src="/logo.png" style="height:55px;padding:5px;"></a>
+                <a class="pagetitle">Artikelinfos</a>
+            </div>
+            <div class="columnbox" style="grid-template-columns: 2fr 5fr;">
+                <div class="desktop column">
+                    <div class="jahresanzeige" style="width:90%;margin-left:3%;margin-right:3%;">
+                        <button onclick="setJahr(-1);"><</button>
+                        <div id="jahreszahl"></div>
+                        <button onclick="setJahr(1);">></button>
+                    </div>
+                    <table class="standard" id="artikeltable"></table>
+                </div>
+                <div class="desktop column" id="edit_field"></div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,53 @@
+table {
+    justify-self: center;
+    align-self: center;
+    width: 80vmax;
+    height: 40vmax;
+    max-width: 800px;
+    max-height: 400px;
+}
+
+table {
+  width: 80%;
+  max-width: 800px;
+  margin: auto;
+}
+
+tr {
+    height: 50%;
+}
+
+td {
+    margin: 10px;
+    width: 25%;
+}
+
+button {
+    width: 100%;
+    height: 100%;
+}
+
+p.icon {
+    align-self: center;
+    line-height: 0.9;
+    font-size: 70px;
+    margin-block-end: 0;
+    margin-block-start: 0;
+}
+
+p.icontext {
+    align-self: center;
+    font-weight: bolder;
+    font-size: 22px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a.mainpagetitle {
+    font-size: 3em;
+    font-family: 'Black And White Picture', serif;
+    align-self: center;
+    padding-left: 30px;
+}

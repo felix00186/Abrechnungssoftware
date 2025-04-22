@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="main.css">
+        <script src="auswahlliste.js"></script>
+        <script src="requests.js"></script>
+        <script>
+            window.onload = _ => {
+                const liste = new Auswahlliste(document.querySelector('div'), Kategorien.OEFFNUNG, '2025-02-01', 10);
+            };
+        </script>
+    </head>
+    <body style="background-color: white;">
+        <div></div>
+    </body>
+</html>

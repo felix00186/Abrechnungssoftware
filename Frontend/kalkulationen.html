@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Kalkulationen</title>
+        <link rel="stylesheet" href="/main.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+        <script src="/requests.js"></script>
+        <script src="/kalkulationen.js"></script>
+        <style>table.info_tabelle td {border-top: 1px solid lightgray;}</style>
+    </head>
+    <body>
+        <div class="desktop">
+            <div style="display:grid;grid-template-columns: 2fr 5fr;">
+                <a href="/"><img src="/logo.png" style="height:55px;padding:5px;"></a>
+                <a class="pagetitle">Kalkulationen</a>
+            </div>
+            <div class="columnbox" style="grid-template-columns:3fr 4fr;">
+                <div class="desktop column">
+                    <p>Auf dieser Seite können nur Kalkulationen ohne Losgrößen angestellt werden. Das heißt, dass davon ausgegangen wird, dass die Portionen bedarfsgerecht zubereitet werden können und die Zutaten bedarfsgerecht zugeschnitten werden können. Falls damit gerechnet werden muss, dass Reste entstehen, die nicht verkauft werden, gibt es dafür eine Excel-Kalkulation.</p>
+                    <table class="standard" id="kalktabelle"></table>
+                    <button style="margin-top: 25px;" onclick="window.location.href='/kalkulationsgrafik.html';">&#128202; Kostendiagramm für das gesamte Sortiment erstellen</button>
+                </div>
+                <div class="desktop column" id="edit_field">
+                    <button class="neu_button" id="neu_button" onclick="openEditField(null, null, null, null, true, true);">&#x2795; Neu</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

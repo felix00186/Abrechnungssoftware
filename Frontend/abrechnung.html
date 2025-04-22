@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Abrechnung</title>
+        <link rel="stylesheet" href="/main.css">
+        <link rel="stylesheet" href="/ausdruck.css">
+        <script src="/requests.js"></script>
+        <script src="/abrechnung.js"></script>
+    </head>
+    <body>
+        <div class="desktop">
+            <div style="display:grid;grid-template-columns: 2fr 5fr;">
+                <a href="/"><img src="/logo.png" style="height:55px;padding:5px;"></a>
+                <a class="pagetitle">Verbrauchsabrechnung</a>
+            </div>
+            <div class="columnbox" style="grid-template-columns:1fr 1fr;">
+                <div class="desktop column">
+                    <div class="edit_field">
+                        <h3>Auswahl des Zeitraums</h3>
+                        <p>Zuerst wählst du aus, für welchen Zeitraum Öffnungen in Betracht gezogen werden.</p>
+                        <table style="margin-bottom: 10px;">
+                            <tr>
+                                <td>von:</td>
+                                <td><input type="date" id="date_von" onchange="datePickerChange();"></td>
+                            </tr>
+                            <tr>
+                                <td>bis:</td>
+                                <td><input type="date" id="date_bis" onchange="datePickerChange();"></td>
+                            </tr>
+                        </table>
+                        <button id="zeitraum_button" onclick="dateSelection();" disabled>Bestätigen</button>
+                    </div>
+                    <div class="edit_field">
+                        <h3>Auswahl der Öffnungen</h3>
+                        <p>Sobald du einen Zeitraum ausgewählt hast, werden alle Öffnungen hier angezeigt. Nun kannst du manuell nachjustieren, falls du nicht alle Öffnungen betrachtet haben möchtest.</p>
+                        <table class="standard" id="oeffnung_tabelle">
+                            <tr style="font-weight: bolder;">
+                                <td><input type="checkbox" id="alle"></td>
+                                <td>Öffnung</td>
+                                <td>Bereich</td>
+                                <td>Datum</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="edit_field">
+                        <h3>Auswahl der Artikel</h3>
+                        <p>Welche Artikel möchtest du in der Abrechnung haben?</p>
+                        <table class="standard" id="artikel_table">
+                            <tr style="font-weight: bolder;">
+                                <td><input type="checkbox" id="alle"></td>
+                                <td>Artikel</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="edit_field">
+                        <p>Du kannst dem Bericht noch eine Nachricht anfügen, die mit ausgedruckt wird:</p>
+                        <textarea id="notizen" style="width: 100%; height: 40px; margin-bottom: 20px;"></textarea>
+                        <button class="neu_button" id="commit_button" onclick="erstelleBericht();" disabled>&#x2699;&#xFE0F; Erstellen</button>
+                        <button class="neu_button" id="print_button" onclick="window.print();" disabled>&#x1F5A8;&#xFE0F; Drucken</button>
+                    </div>
+                </div>
+                <div class="desktop column" id="edit_field">
+                    <div class="content_to_print" id="bericht" style="display: none;">
+                        <p class="text_to_print">ILSC e. V.<br>bc-Studentencafé<br>Max-Planck-Ring 16<br>98693 Ilmenau</p>
+                        <p class="text_to_print" style="text-align: right;" id="datum_feld"></p>
+                        <h1 class="text_to_print" style="text-align: center;">Verbrauchsabrechnung</h1>
+                        <p class="text_to_print">Betrachtet wurden die folgenden Öffnungen:</p>
+                        <ul id="oeffnung_liste" class="text_to_print" style="font-size: smaller;"></ul>
+                        <p class="text_to_print">Verbraucht wurden die folgenden Produkte in den angegebenen Mengen.</p>
+                        <table class="text_to_print" id="verbrauch_tabelle" style="border-collapse:collapse;border-top:2px solid black;border-bottom:2px solid black;width:100%;">
+                            <tr style="border-bottom:2px solid black;font-weight:bolder;" data-title="1">
+                                <td>#</td>
+                                <td>Artikel</td>
+                                <td>Anzahl</td>
+                                <td>Einheit</td>
+                            </tr>
+                        </table>
+                        <p class="text_to_print" id="bericht_notizen" style="margin-top: 15px;"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

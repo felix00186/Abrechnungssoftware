@@ -1,0 +1,86 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Bilanz</title>
+        <link rel="stylesheet" href="/main.css">
+        <link rel="stylesheet" href="/ausdruck.css">
+        <script src="/requests.js"></script>
+        <script src="/bilanz.js"></script>
+    </head>
+    <body>
+        <div class="desktop">
+            <div style="display:grid;grid-template-columns: 2fr 5fr;">
+                <a href="/"><img src="/logo.png" style="height:55px;padding:5px;"></a>
+                <a class="pagetitle">Bilanz erstellen</a>
+            </div>
+            <p>Dieser Bereich wurde in ein Jupyter Notebook ausgelagert. Es liegt im Ordner "Jahresendauswertung". Du kannst in einem Konsolenfenster in diesen Ordner gehen und dort dann den Befehl "jupyter lab" eingeben. Mehr dazu findest du in der Bedienungsanleitung.</p>
+            <div class="columnbox" style="grid-template-columns:2fr 5fr;display:none;">
+                <div class="desktop column">
+                    <div class="edit_field">
+                        <h2>Zeitraum</h2>
+                        <p>Lege den Zeitraum fest, für den die Bilanz erstellt werden soll.</p>
+                        <table style="margin-bottom: 10px;">
+                            <tr>
+                                <td>von:</td>
+                                <td><input type="date" id="date_von" onchange="datePickerChange();"></td>
+                            </tr>
+                            <tr>
+                                <td>bis:</td>
+                                <td><input type="date" id="date_bis" onchange="datePickerChange();"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="edit_field">
+                        <h2>Einstellungen</h2>
+                        <p>Die eine oder andere Option gibt es noch.</p>
+                        <form>
+                            <p>
+                                <input type="checkbox" id="checkbox1">
+                                <label for="checkbox1">zu jeder Öffnung den Verbrauch der Artikel auflisten</label>
+                            </p>
+                            <p>
+                                <input type="checkbox" id="checkbox2">
+                                <label for="checkbox2">Liste aller Einkäufe erstellen</label>
+                            </p>
+                        </form>
+                    </div>
+                    <div class="edit_field">
+                        <button class="neu_button" id="commit_button" onclick="erstelleBericht();" disabled>&#x2699;&#xFE0F; Erstellen</button>
+                        <button class="neu_button" id="print_button" onclick="window.print();" disabled>&#x1F5A8;&#xFE0F; Drucken</button>
+                    </div>
+                </div>
+                <div class="desktop column" id="edit_field">
+                    <div class="content_to_print" id="bericht" style="display: block;">
+                        <h1 id="bilanz_titel" style="text-align:center;font-size:40px;"></h1>
+                        <h2 id="bilanz_zeitraum" style="text-align:center;font-size:25px;"></h2>
+                        <hr style="page-break-after:always;">
+                        <div id="gesamtbilanz">
+                            <h1>Gesamtbilanz</h1>
+                            <p>Insgesamt ergibt sich folgendes Ergebnis:</p>
+                            <table>
+                                <tr>
+                                    <td style="padding-right: 20px;">Einnahmen</td>
+                                    <td id="einnahmen_feld" style="text-align: right;"></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-right: 20px;">Ausgaben</td>
+                                    <td id="ausgaben_feld" style="text-align: right;"></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-right: 20px;">Saldo</td>
+                                    <td id="saldo_feld" style="text-align: right;"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="bereiche">
+                            <h1>Aufschlüsselung nach Bereichen</h1>
+                        </div>
+                        <div id="artikel">
+                            <h1>Warenübersicht</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
