@@ -4,6 +4,10 @@ from typing import Generator, Dict, Any
 from string_functions import trim_string
 
 
+MWST_FAKTOR = 1.19
+ZEHNT_FAKTOR = 1.1
+
+
 def get_liste() -> Generator[Dict[str, Any], None, None]:
     for row in connection.get("SELECT id, name, preis, notizen, anzeigen FROM Kalkulationen ORDER BY name;"):
         yield {"id": row[0], "name": row[1], "preis": row[2], "notizen": row[3], "anzeigen": bool(row[4])}
@@ -94,12 +98,12 @@ def get_diagramme(data) -> Generator[Dict[str, Any], None, None]:
             preis_brutto = data[str(id)]
         if preis_brutto is None:
             continue
-        ohne_mwst = preis_brutto / 1.19
+        ohne_mwst = preis_brutto / MWST_FAKTOR
         mwst = preis_brutto - ohne_mwst
-        preis_netto = ohne_mwst / 1.1
+        preis_netto = ohne_mwst / ZEHNT_FAKTOR
         zehnt = ohne_mwst - preis_netto
         gewinn = preis_netto - kosten
-        faktor = preis_netto / kosten
+        faktor = preis_netto / kosten if kosten > 0 else 0
         yield {
             "waren": kosten,
             "mwst": mwst,
