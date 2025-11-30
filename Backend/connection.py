@@ -1,10 +1,26 @@
 import sqlite3
 from sqlite3 import Cursor
 from typing import Union, List
+import os.path
 
 
-db = sqlite3.connect("data.db")
-cur = db.cursor()
+db = None
+cur = None
+DB_PATH = "data.db"
+
+
+def init_db():
+    if os.path.isfile(DB_PATH):
+        sql_file = None
+    else:
+        with open("init.sql", "r") as f:
+            sql_file = f.read().split(";")
+    global db, cur
+    db = sqlite3.connect("data.db")
+    cur = db.cursor()
+    if sql_file:
+        for sql in sql_file[:-1]:
+            execute(sql + ";")
 
 
 def get_new_id(table: str) -> int:

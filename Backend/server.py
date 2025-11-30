@@ -12,6 +12,7 @@ import bilanz
 import kalkulationen
 import inventur
 import losgroessen
+import connection
 
 hostName = "localhost"
 port = 1987
@@ -196,6 +197,7 @@ class MyServer(BaseHTTPRequestHandler):
             self.wfile.write(bytes(json.dumps(resp), "utf-8"))
 
 
+connection.init_db()
 webbrowser.open(f"http://{hostName}:{port}", new=0, autoraise=True)
 
 webServer = HTTPServer((hostName, port), MyServer)
