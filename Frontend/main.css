@@ -1,12 +1,12 @@
 body {
-    background-color: rgb(184, 11, 11);
+    background-color: black;
     display: grid;
     height: 100vh;
     margin: 0;
 }
 
 div.desktop {
-    background-color: rgb(255, 248, 238);
+    background-color: lightgray;
     border: 1px solid black;
     margin: 2vh;
     min-width: 92%;

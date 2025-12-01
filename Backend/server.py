@@ -37,6 +37,8 @@ class MyServer(BaseHTTPRequestHandler):
             elif self.path.endswith("png"):
                 self.send_header("Content-Type", "image/png")
                 image = True
+            elif self.path.endswith("svg"):
+                self.send_header("Content-Type", "image/svg+xml")
             else:
                 self.send_header("Content-Type", "application/json")
             self.end_headers()
