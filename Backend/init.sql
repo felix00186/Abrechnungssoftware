@@ -1,147 +1,155 @@
 create table Einkaeufe
 (
-    id         INTEGER primary key,
-    datum      DATE,
-    laden      TEXT default '',
-    notizen    TEXT default '',
-    einkaeufer TEXT default ''
+    id         		INTEGER	primary key,
+    datum      		DATE    not null,
+    laden      		TEXT    not null	default '',
+    notizen    		TEXT    not null	default '',
+    einkaeufer 		TEXT    not null	default ''
 );
+
 create table EinkaufArtikel
 (
-    einkauf       INTEGER
-        constraint ea_einkauf references Einkaeufe,
-    getraenk      INTEGER
-        constraint ea_artikel references Getraenke,
-    menge         REAL    default 0,
-    gesamt_netto  INTEGER default 0,
-    einzel_netto  INTEGER default 0,
-    mwst          REAL    default 0,
-    gesamt_brutto INTEGER default 0,
-    losgroesse    INTEGER default NULL,
-    orig_menge    REAL    default 0,
-    metadata      TEXT    default NULL
+    einkauf       	INTEGER not null					references Einkaeufe(id),
+    getraenk      	INTEGER not null					references Getraenke(id),
+    menge         	REAL    not null	default 0										check menge > 0,
+    gesamt_netto  	INTEGER not null	default 0										check gesamt_netto >= 0,
+    einzel_netto  	INTEGER not null	default 0										check einzel_netto >= 0,
+    mwst          	REAL    not null	default 0										check mwst >= 0,
+    gesamt_brutto 	INTEGER not null	default 0										check gesamt_brutto >= 0,
+    losgroesse    	INTEGER 			default null 	references Losgroessen(id),
+    orig_menge    	REAL    not null	default 0										check orig_menge >= 0,
+    metadata      	TEXT    			default null
 );
+
 create table EinkaufBereich
 (
-    einkauf INTEGER
-        constraint eb_einkauf references Einkaeufe,
-    bereich INTEGER
-        constraint eb_bereich references Oeffnungsarten,
-    netto   INTEGER     default 0,
-    mwst    REAL        default 0,
-    brutto  INTEGER     default 0
+    einkauf 		INTEGER not null					references Einkaeufe(id),
+    bereich 		INTEGER not null					references Oeffnungsarten(id),
+    netto   		INTEGER not null	default 0										check netto >= 0,
+    mwst    		REAL    not null	default 0										check mwst >= 0,
+    brutto  		INTEGER not null	default 0										check brutto >= 0
 );
+
 create table EinkaufOeffnung
 (
-    einkauf  INTEGER
-        constraint eo_einkauf references Einkaeufe,
-    oeffnung INTEGER
-        constraint eo_oeffnung references Oeffnungen,
-    netto    INTEGER default 0,
-    mwst     REAL    default 0,
-    brutto   INTEGER default 0
+    einkauf  		INTEGER not null					references Einkaeufe(id),
+    oeffnung 		INTEGER not null					references Oeffnungen(id),
+    netto    		INTEGER not null	default 0										check netto >= 0,
+    mwst     		REAL    not null	default 0										check mwst >= 0,
+    brutto   		INTEGER not null	default 0										check brutto >= 0
 );
+
 create table Einnahmen
 (
-    id       INTEGER primary key,
-    oeffnung INTEGER
-        constraint einn_oeffnung references Oeffnungen,
-    name     TEXT    default '',
-    brutto   INTEGER default 0,
-    mwst     INTEGER default 19,
-    zehnt    INTEGER default 10,
-    netto    INTEGER default 0
+    id       		INTEGER primary key,
+    oeffnung 		INTEGER not null					references Oeffnungen(id),
+    name     		TEXT    not null	default '',
+    brutto   		INTEGER not null	default 0										check brutto >= 0,
+    mwst     		INTEGER not null	default 19										check mwst between 0 and 99,
+    zehnt    		INTEGER not null	default 10										check zehnt between 0 and 99,
+    netto    		INTEGER not null	default 0										check netto >= 0
 );
+
 create table Getraenke
 (
-    id           INTEGER primary key,
-    name         TEXT default '',
-    einheit_lang TEXT default 'Liter',
-    einheit_kurz TEXT default 'l',
-    sichtbar     TINYINT default 1,
-    reste        TINYINT default 1,
-    notizen      TEXT    default NULL,
-    bereich      INTEGER
-        constraint getr_bereich references Oeffnungsarten
+    id           	INTEGER primary key,
+    name         	TEXT    not null	default '',
+    einheit_lang 	TEXT    not null	default 'Liter'									check einheit_lang in ('Liter', 'Centiliter', 'Milliliter', 'Kilogramm', 'Gramm', 'Stück', 'Flaschen', 'Dosen', 'Kannen', 'Packungen', 'Kilometer'),
+    einheit_kurz 	TEXT    not null	default 'l'										check einheit_kurz in ('l', 'cl', 'ml', 'kg', 'g', 'Stk.', 'Fl.', 'Dos.', 'Kan.', 'Pck.', 'km'),
+    sichtbar     	TINYINT not null	default 1										check sichtbar in (0, 1),
+    reste        	TINYINT not null	default 1										check reste in (0, 1),
+    notizen      	TEXT    not null	default '',
+    bereich      	INTEGER 			default null	references Oeffnungsarten(id),
+	check (einheit_kurz = case einheit_lang when 'Liter' 		then 'l'
+											when 'Centiliter' 	then 'cl'
+											when 'Milliliter' 	then 'ml'
+											when 'Kilogramm' 	then 'kg'
+											when 'Gramm' 		then 'g'
+											when 'Stück' 		then 'Stk.'
+											when 'Flaschen' 	then 'Fl.'
+											when 'Dosen' 		then 'Dos.'
+											when 'Kannen' 		then 'Kan.'
+											when 'Packungen' 	then 'Pck.'
+											when 'Kilometer' 	then 'km'
+											else '__INVALID__' 	end)
 );
+
 create table Kalkulationen
 (
-    id       INTEGER primary key,
-    name     TEXT default '' not null,
-    preis    INTEGER default 0,
-    notizen  TEXT default '',
-    anzeigen TINYINT default 1
+    id       		INTEGER primary key,
+    name     		TEXT    not null	default '',
+    preis    		INTEGER not null	default 0										check preis >= 0,
+    notizen  		TEXT    not null	default '',
+    anzeigen 		TINYINT not null	default 1										check anzeigen in (0, 1)
 );
+
 create table KalkulationenArtikel
 (
-    kalk    INTEGER
-        constraint ka_kalk references Kalkulationen,
-    artikel INTEGER
-        constraint ka_art references Getraenke,
-    menge   REAL default 0
+    kalk    		INTEGER not null					references Kalkulationen(id),
+    artikel 		INTEGER not null					references Getraenke(id),
+    menge   		REAL    not null	default 0										check menge >= 0
 );
+
 create table KalkulationenSonstigeArtikel
 (
-    kalk        INTEGER
-        constraint ksa_kalk references Kalkulationen,
-    name        TEXT    default '',
-    einzelpreis INTEGER default 0,
-    menge       REAL    default 0
+    kalk        	INTEGER 							references Kalkulationen(id),
+    name        	TEXT    not null	default '',
+    einzelpreis 	INTEGER not null	default 0,
+    menge       	REAL    not null	default 0										check menge >= 0
 );
+
 create table Losgroessen
 (
-    id       INTEGER primary key,
-    getraenk INTEGER not null
-        constraint losgroesse_artikel references Getraenke,
-    name     TEXT    default '' not null,
-    faktor   REAL    default 0  not null,
-    summand  REAL    default 0  not null,
-    sichtbar TINYINT default 1  not null
+    id       		INTEGER primary key,
+    getraenk 		INTEGER not null					references Getraenke(id),
+    name     		TEXT    not null	default '',
+    faktor   		REAL    not null	default 0,
+    summand  		REAL    			default 0,
+    sichtbar 		TINYINT not null	default 1										check sichtbar in (0, 1),
+	check(not(faktor = 0 and summand = 0))
 );
+
 create table Oeffnungen
 (
-    id      INTEGER primary key,
-    datum   DATE,
-    art     INTEGER
-        constraint oef_art references Oeffnungsarten,
-    notizen TEXT,
-    name    TEXT default ''
+    id      		INTEGER primary key,
+    datum   		DATE	not null,
+    art     		INTEGER not null					references Oeffnungsarten(id),
+    notizen 		TEXT	not null	default '',
+    name    		TEXT 	not null	default ''
 );
+
 create table OeffnungenVerbrauch
 (
-    oeffnung       INTEGER
-        constraint ov_oeff references Oeffnungen,
-    getraenk       INTEGER
-        constraint ov_art references Getraenke,
-    anfang         REAL,
-    plus           REAL,
-    ende           REAL,
-    differenz      REAL,
-    losgroesse     INTEGER,
-    differenz_orig REAL default NULL,
-    metadata       TEXT default NULL
+    oeffnung       	INTEGER	not null					references Oeffnungen(id),
+    getraenk       	INTEGER	not null					references Getraenke(id),
+    anfang         	REAL	not null	default 0.0										check anfang >= 0,
+    plus           	REAL	not null	default 0.0										check plus >= 0,
+    ende           	REAL	not null	default 0.0										check ende >= 0,
+    differenz      	REAL	not null	default 0.0										check differenz >= 0,
+    losgroesse     	INTEGER				default null	references Losgroessen(id),
+    differenz_orig 	REAL 	not null	default 0.0										check differenz_orig >= 0,
+    metadata       	TEXT 				default null
 );
+
 create table Oeffnungsarten
 (
-    id       INTEGER primary key,
-    name     TEXT default '',
-    sichtbar TINYINT default 1,
-    notizen  TEXT default ''
+    id       		INTEGER primary key,
+    name     		TEXT	not null	default 'Öffnung'								check length(name) > 0,
+    sichtbar 		TINYINT not null	default 1										check sichtbar in (0, 1),
+    notizen  		TEXT 	not null	default ''
 );
+
 create table OeffnungsartGetraenke
 (
-    id         INTEGER
-        constraint og_oeart references Oeffnungsarten,
-    getraenk   INTEGER
-        constraint og_art references Getraenke,
-    nummer     INTEGER,
-    losgroesse INTEGER
-        constraint og_los references Losgroessen
+    id         		INTEGER	not null					references Oeffnungsarten(id),
+    getraenk   		INTEGER	not null	 				references Getraenke(id),
+    nummer     		INTEGER not null	default 0										check nummer >= 0,
+    losgroesse 		INTEGER				default null	references Losgroessen(id)
 );
+
 create table VerbrauchsabrechnungStandardArtikel
 (
-    getraenk INTEGER
-        constraint FK__Getraenke references Getraenke
+    getraenk 		INTEGER								references Getraenke(id)
 );
 
 INSERT INTO Oeffnungsarten VALUES (0, '> keinem Bereich zugeordnet', 1, '');
