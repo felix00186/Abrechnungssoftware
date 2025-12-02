@@ -16,12 +16,14 @@ import connection
 
 hostName = "localhost"
 port = 1987
+with codecs.open("../Frontend/sektionen/sektion.txt", "r", "utf-8") as f: sektion = f.read().strip()
 
 
 class MyServer(BaseHTTPRequestHandler):
 
     def do_GET(self):
         if not self.path.startswith("/func"):
+            self.path = self.path.replace("SEKTION", sektion)
             self.send_response(200)
             splitted = self.path.split("?")
             self.path = splitted[0]

@@ -1,0 +1,167 @@
+body {
+    background-color: rgb(184, 11, 11);
+    display: grid;
+    height: 100vh;
+    margin: 0;
+}
+
+div.desktop {
+    background-color: rgb(255, 248, 238);
+    border: 1px solid black;
+    margin: 2vh;
+    min-width: 92%;
+    height: 92vh;
+    padding: 10px;
+    display:grid;
+    grid-template-rows: auto auto;
+}
+p, span {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 16px;
+}
+
+h2 {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin-block-start: 0;
+}
+
+div.column {
+    margin: 0;
+    overflow-y: auto;
+    overflow-x: auto;
+    background-color: white;
+    max-height: 70vh;
+    display: block;
+}
+
+div.column p {
+    margin-block-start: 0.1em;
+    margin-block-end: 0.2em;
+}
+
+table.standard {
+    border-collapse: collapse;
+    border: 2px solid black;
+    width: 100%;
+}
+
+table.standard td, table.standard th {
+    border: 1px solid black;
+    padding: 4px;
+    padding-left: 8px;
+}
+
+td.button_title {
+    width: 10%;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+
+table.standard button {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+table.standard tr:hover {
+    background-color: rgb(255, 248, 244);
+    transition: background-color 0.1s ease;
+}
+
+table.standard td:hover, table.standard th:hover {
+    background-color: rgb(254, 240, 232);
+    transition: background-color 0.1s ease;
+}
+
+div.columnbox {
+    display:grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+div.edit_field {
+    border: 1px solid rgb(139, 137, 137);
+    padding: 4%;
+    width: calc(92% - 2px);
+    display: grid;
+    margin-bottom: 5px;
+}
+
+div.button_div {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 15px;
+    gap: 20px;
+}
+
+div.button_div button {
+    width: 100%;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+button.neu_button {
+    font-weight: bolder;
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+}
+
+input.disabled {
+    background-color: lightgray;
+    border: 1px solid darkgray;
+    width: 55px;
+    text-align: right;
+}
+
+input.enabled {
+    background-color: white;
+    border: 1px solid black;
+    width: 55px;
+    text-align: right;
+}
+
+table.standard ul {
+    list-style-position: inside;
+    padding-left: 1em;
+    text-indent: -1.5em;
+    font-size: small;
+}
+
+div.jahresanzeige {
+    width: 60%;
+    margin-left: 18%;
+    margin-right: 18%;
+    margin-bottom: 15px;
+    height: 30px;
+    border: 1px solid darkgray;
+    display: grid;
+    grid-template-columns: 3fr 2fr 3fr;
+}
+
+div.jahresanzeige button {
+    height: 100%;
+    width: 100%;
+}
+
+div.jahresanzeige div {
+    width: 100%;
+    height: 100%;
+    align-content: center;
+    font-size: 15px;
+    font-weight: bold;
+    justify-content: center;
+    display: grid;
+}
+
+a.pagetitle {
+    font-size: 30px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+    align-self: center;
+    padding-left: 30px;
+}
